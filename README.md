@@ -10,7 +10,7 @@
 
 remove the credsStore for our purposes or use "cresStore": "osxkeychain"
 
-Note if you see the Auths section you are logged in
+Note if you see the Auths section you are logged
 
 ```JSON
 {
@@ -35,4 +35,7 @@ Note if you see the Auths section you are logged in
     "hooks": "true"
   }
 }
-````
+```
+
+4. docker login -u 
+  this works better than just docker login
