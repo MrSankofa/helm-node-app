@@ -53,3 +53,39 @@ Note if you see the Auths section you are logged
 7. confirm that it works by running the image
 8. tag the image
 9. push the image to the docker repository to be used elsewhere
+10. Helmify the app so that we can orchestrate the full stack app, create production, development and POC environments
+11. confirm that the app was helmified correctly by
+
+# checking the directory for these files
+
+helm-node-app/
+├── charts/          # Directory to include dependent charts
+├── templates/       # Kubernetes manifest templates
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   ├── ingress.yaml
+│   ├── _helpers.tpl # Template helpers
+│   └── ...          # Other default template files
+├── values.yaml      # Default configuration values for your chart
+├── Chart.yaml       # Metadata about the chart (name, version, etc.)
+└── .helmignore      # Files to ignore when packaging the chart
+
+
+# inspect the chart metadata, for the first version it should look like this
+
+```yaml
+apiVersion: v2
+name: helm-node-app
+description: A Helm chart for Kubernetes
+type: application
+version: 0.1.0
+appVersion: "1.16.0"
+```
+
+# validate teh chart with helm's linter, we should get the expected number of charts and no failures
+
+helm lint helm-node-app
+
+# execute a dry run to see if it compiles correctly
+
+helm template helm-node-app
